@@ -13,8 +13,6 @@ public class TextManager : MonoBehaviour {
 	void Start () {
         csvData = CSVReader.LoadFromAssets(LocalizeFileName);
         localeTextData = new LocaleTextData(csvData);
-//        string text = textData.GetValueAt(0, 1);
-//        Debug.Log("text: " + text);
 
         localeTextData.SetLocale(Locale.JA);
         string jaText = localeTextData.GetLocalizedText(TextKey.SampleKey1);

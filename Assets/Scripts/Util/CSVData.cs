@@ -49,6 +49,24 @@ public class CSVData {
     /// <param name="rowIndex">Row index.</param>
     public int GetColumnIndex(string columnKey, int rowIndex)
     {
+        if (string.IsNullOrEmpty(columnKey))
+        {
+            return -1;
+        }
+
+        for(int columnIndex = 0 ; columnIndex < csvData.Count ; columnIndex ++)
+        {
+            if (rowIndex >= csvData[columnIndex].Count)
+            {
+                continue;
+            }
+
+            if (string.Equals(columnKey, csvData[columnIndex][rowIndex]))
+            {
+                return columnIndex;
+            }
+        }
+
         return -1;
     }
 
@@ -60,7 +78,50 @@ public class CSVData {
     /// <param name="columnIndex">Column index.</param>
     public int GetRowIndex(string rowKey, int columnIndex)
     {
+        if (string.IsNullOrEmpty(rowKey)
+            || columnIndex >= csvData.Count)
+        {
+            return -1;
+        }
+
+        for(int rowIndex = 0 ; rowIndex < csvData[columnIndex].Count ; rowIndex ++)
+        {
+            if (rowIndex >= csvData[columnIndex].Count)
+            {
+                continue;
+            }
+
+            if (string.Equals(rowKey, csvData[columnIndex][rowIndex]))
+            {
+                return rowIndex;
+            }
+        }
+
         return -1;
+    }
+
+    /// <summary>
+    /// Gets the row and column index of cell that first matches the value
+    /// Index data will be returned as Vector2 data
+    /// 
+    /// Vector2.x = RowIndex
+    /// Vector2.y = ColumnIndex
+    /// </summary>
+    /// <returns>The column and row index.</returns>
+    /// <param name="value">Value.</param>
+    public Vector2 GetRowAndColumnIndex(string value)
+    {
+        for(int columnIndex = 0 ; columnIndex < csvData.Count ; columnIndex ++)
+        {
+            for(int rowIndex = 0 ; rowIndex < csvData[columnIndex].Count ; rowIndex ++)
+            {
+                if (string.Equals(value, csvData[columnIndex][rowIndex]))
+                {
+                    return new Vector2(rowIndex, columnIndex);
+                }
+            }
+        }
+        return new Vector2(-1, -1);
     }
 
     /// <summary>
