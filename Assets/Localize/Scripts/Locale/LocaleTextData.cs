@@ -51,6 +51,9 @@ public class LocaleTextData {
         }
 
         LocaleCSVData = localeCSVData;
+
+        // Set default locale
+        SetLocale(Locale.GetSystemLocaleKey());
     }
 
     /// <summary>

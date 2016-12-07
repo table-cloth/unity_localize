@@ -22,4 +22,24 @@ public class Locale {
     /// Vietnamese Locale Key
     /// </summary>
     public const string VN = "VN";
+
+    /// <summary>
+    /// Gets the locale key, referring to the systemLanguage.
+    /// </summary>
+    /// <returns>The system locale key.</returns>
+    public static string GetSystemLocaleKey()
+    {
+        switch (Application.systemLanguage.ToString())
+        {
+            case "Japanese":
+                return JA;
+
+            case "Vietnamese":
+                return VN;
+
+            case "English":
+            default:
+                return EN;
+        }
+    }
 }
